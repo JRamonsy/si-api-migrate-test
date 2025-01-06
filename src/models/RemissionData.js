@@ -4,15 +4,15 @@ const sequelize = require('../utils/connection');
 const RemissionData = sequelize.define('remissionData', {
     email: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: true
     },
     referenceAgent: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     phone: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     remissionDate: {
         type: DataTypes.DATEONLY,
@@ -24,11 +24,43 @@ const RemissionData = sequelize.define('remissionData', {
     },
     whoReceive: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    unit: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+    },
+    deliveryDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: true
+    },
+    unitPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    totalPrice: {
+        type: DataTypes.DECIMAL,
+        allowNull: true
+    },
+    subtotal: {
+        type: DataTypes.DECIMAL,
+        allowNull: true
+    },
+    vat: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    total: {
+        type: DataTypes.DECIMAL,
+        allowNull: true
     },
     plateId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'plate_data',
           key: 'id'

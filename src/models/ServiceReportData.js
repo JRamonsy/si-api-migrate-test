@@ -4,19 +4,19 @@ const sequelize = require('../utils/connection');
 const ServiceReportData = sequelize.define('serviceReportData', {
     problemDescription: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     observations: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     requirementForRepair: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     serviceCompleted: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     plateId: {
         type: DataTypes.INTEGER,

@@ -1,6 +1,7 @@
 const { getAll, create, getOne, remove, update } = require('../controllers/imageDatasServiceReport.controllers.js');
 const express = require('express');
 const upload = require('../utils/multer');
+
 const imageDatasServiceReportRouter = express.Router();
 
 imageDatasServiceReportRouter.route('/images_datas')

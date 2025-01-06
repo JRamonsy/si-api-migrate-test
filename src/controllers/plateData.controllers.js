@@ -5,6 +5,11 @@ const CheckListData = require('../models/CheckListData');
 const ServiceReportData = require('../models/ServiceReportData');
 const RemissionData = require('../models/RemissionData');
 const ImageDatasServiceReport = require('../models/ImageDatasServiceReport');
+const ImgDataDiagnosisSr = require('../models/ImgDataDiagnosisSr');
+const ImgDataEvidenceInitialSr = require('../models/ImgDataEvidenceInitialSr');
+const ImgDataEvidenceFinalSr = require('../models/ImgDataEvidenceFinalSr');
+const EvidenceFinalSr = require('../models/EvidenceFinalSr');
+const EvidenceInitialSr = require('../models/EvidenceInitialSr');
 
 const getAll = catchError(async(req, res) => {
     const results = await PlateData.findAll({
@@ -13,7 +18,16 @@ const getAll = catchError(async(req, res) => {
             { model: CheckListData, as: 'checkList' },
             { model: ServiceReportData, as: 'serviceReport', 
                 include: [
-                { model: ImageDatasServiceReport, as: 'images' }
+                    { model: ImageDatasServiceReport, as: 'images' },
+                    { model: ImgDataDiagnosisSr, as: 'images_diagnosis' },
+                    { model: ImgDataEvidenceInitialSr, as: 'images_evidence_initial',
+                        include: [
+                            { model: EvidenceInitialSr, as: 'evidenceInitial' }
+                        ]},
+                    { model: ImgDataEvidenceFinalSr, as: 'images_evidence_final',
+                        include: [
+                            { model: EvidenceFinalSr, as: 'evidenceFinal' }
+                        ]},
             ]},
             { model: RemissionData, as: 'Remission'}
         ]
@@ -32,7 +46,13 @@ const getOne = catchError(async(req, res) => {
         include: [
             { model: ImageData, as: 'image' },
             { model: CheckListData, as: 'checkList' },
-            { model: ServiceReportData, as: 'serviceReport'},
+            { model: ServiceReportData, as: 'serviceReport', 
+                include: [
+                { model: ImageDatasServiceReport, as: 'images' },
+                { model: ImgDataDiagnosisSr, as: 'images_diagnosis' },
+                { model: ImgDataEvidenceInitialSr, as: 'images_evidence_initial' },
+                { model: ImgDataEvidenceFinalSr, as: 'images_evidence_final' },
+            ]},
             { model: RemissionData, as: 'Remission'}
         ]
     });

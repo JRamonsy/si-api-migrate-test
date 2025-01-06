@@ -4,6 +4,11 @@ const CheckListData = require('./CheckListData');
 const ServiceReportData = require('./ServiceReportData');
 const RemissionData = require('./RemissionData');
 const ImageDatasServiceReport = require('./ImageDatasServiceReport');
+const ImgDataDiagnosisSr = require('./ImgDataDiagnosisSr');
+const ImgDataEvidenceInitialSr = require('./ImgDataEvidenceInitialSr');
+const ImgDataEvidenceFinalSr = require('./ImgDataEvidenceFinalSr');
+const EvidenceFinalSr = require('./EvidenceFinalSr');
+const EvidenceInitialSr = require('./EvidenceInitialSr');
 
 
 PlateData.hasMany(ImageData, { foreignKey: 'plateId', as: 'image', onDelete: 'CASCADE' });
@@ -42,5 +47,19 @@ RemissionData.belongsTo(PlateData, {
 ServiceReportData.hasMany(ImageDatasServiceReport, { foreignKey: 'service_report_id', as: 'images', onDelete: 'CASCADE', hooks: true  });
 ImageDatasServiceReport.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });
 
+ServiceReportData.hasMany(ImgDataDiagnosisSr, { foreignKey: 'service_report_id', as: 'images_diagnosis', onDelete: 'CASCADE', hooks: true  });
+ImgDataDiagnosisSr.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });
+
+ServiceReportData.hasMany(ImgDataEvidenceInitialSr, { foreignKey: 'service_report_id', as: 'images_evidence_initial', onDelete: 'CASCADE', hooks: true  });
+ImgDataEvidenceInitialSr.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });
+
+ServiceReportData.hasMany(ImgDataEvidenceFinalSr, { foreignKey: 'service_report_id', as: 'images_evidence_final', onDelete: 'CASCADE', hooks: true  });
+ImgDataEvidenceFinalSr.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });
+
+ImgDataEvidenceFinalSr.hasOne(EvidenceFinalSr, { foreignKey: 'imgEvidenceFId', as: 'evidenceFinal', onDelete: 'CASCADE', hooks: true  })
+EvidenceFinalSr.belongsTo(ImgDataEvidenceFinalSr, { foreignKey: 'imgEvidenceFId', as: 'imgEvidenceF' })
+
+ImgDataEvidenceInitialSr.hasOne(EvidenceInitialSr, { foreignKey: 'imgEvidenceIId', as: 'evidenceInitial', onDelete: 'CASCADE', hooks: true  })
+EvidenceInitialSr.belongsTo(ImgDataEvidenceInitialSr, { foreignKey: 'imgEvidenceIId', as: 'imgEvidenceI' })
 
 
