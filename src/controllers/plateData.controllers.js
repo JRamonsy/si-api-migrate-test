@@ -10,6 +10,7 @@ const ImgDataEvidenceInitialSr = require('../models/ImgDataEvidenceInitialSr');
 const ImgDataEvidenceFinalSr = require('../models/ImgDataEvidenceFinalSr');
 const EvidenceFinalSr = require('../models/EvidenceFinalSr');
 const EvidenceInitialSr = require('../models/EvidenceInitialSr');
+const ImgDataObservations = require('../models/ImgDataObservations');
 
 const getAll = catchError(async(req, res) => {
     const results = await PlateData.findAll({
@@ -19,6 +20,7 @@ const getAll = catchError(async(req, res) => {
             { model: ServiceReportData, as: 'serviceReport', 
                 include: [
                     { model: ImageDatasServiceReport, as: 'images' },
+                    { model: ImgDataObservations, as: 'images_observations' },
                     { model: ImgDataDiagnosisSr, as: 'images_diagnosis' },
                     { model: ImgDataEvidenceInitialSr, as: 'images_evidence_initial',
                         include: [
@@ -50,6 +52,7 @@ const getOne = catchError(async(req, res) => {
                 include: [
                 { model: ImageDatasServiceReport, as: 'images' },
                 { model: ImgDataDiagnosisSr, as: 'images_diagnosis' },
+                { model: ImgDataObservations, as: 'images_observations' },
                 { model: ImgDataEvidenceInitialSr, as: 'images_evidence_initial' },
                 { model: ImgDataEvidenceFinalSr, as: 'images_evidence_final' },
             ]},

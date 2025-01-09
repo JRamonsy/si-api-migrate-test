@@ -9,6 +9,7 @@ const ImgDataEvidenceInitialSr = require('./ImgDataEvidenceInitialSr');
 const ImgDataEvidenceFinalSr = require('./ImgDataEvidenceFinalSr');
 const EvidenceFinalSr = require('./EvidenceFinalSr');
 const EvidenceInitialSr = require('./EvidenceInitialSr');
+const ImgDataObservations = require('./ImgDataObservations');
 
 
 PlateData.hasMany(ImageData, { foreignKey: 'plateId', as: 'image', onDelete: 'CASCADE' });
@@ -49,6 +50,15 @@ ImageDatasServiceReport.belongsTo(ServiceReportData, { foreignKey: 'service_repo
 
 ServiceReportData.hasMany(ImgDataDiagnosisSr, { foreignKey: 'service_report_id', as: 'images_diagnosis', onDelete: 'CASCADE', hooks: true  });
 ImgDataDiagnosisSr.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });
+// IMG OBSERVATIONS
+ServiceReportData.hasMany(ImgDataObservations, { 
+    foreignKey: 'service_report_id', // id en comun
+    as: 'images_observations', //  nombre en consola
+    onDelete: 'CASCADE', // borra lo que tenga anidado
+    hooks: true  }); // hooks definidos en tus modelos sean ejecutados
+ImgDataObservations.belongsTo(ServiceReportData, { 
+    foreignKey: 'service_report_id', 
+    as: 'service' });
 
 ServiceReportData.hasMany(ImgDataEvidenceInitialSr, { foreignKey: 'service_report_id', as: 'images_evidence_initial', onDelete: 'CASCADE', hooks: true  });
 ImgDataEvidenceInitialSr.belongsTo(ServiceReportData, { foreignKey: 'service_report_id', as: 'service' });

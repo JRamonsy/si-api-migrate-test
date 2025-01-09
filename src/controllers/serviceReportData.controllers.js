@@ -5,12 +5,14 @@ const ImgDataDiagnosisSr = require('../models/ImgDataDiagnosisSr');
 const ImgDataEvidenceInitialSr = require('../models/ImgDataEvidenceInitialSr');
 const ImgDataEvidenceFinalSr = require('../models/ImgDataEvidenceFinalSr');
 const EvidenceInitialSr = require('../models/EvidenceInitialSr');
+const ImgDataObservations = require('../models/ImgDataObservations');
 
 const getAll = catchError(async(req, res) => {
     const results = await ServiceReportData.findAll({
             include: [
                 { model: ImageDatasServiceReport, as: 'images' },
                 { model: ImgDataDiagnosisSr, as: 'images_diagnosis' },
+                { model: ImgDataObservations, as: 'images_observations' },
                 { model: ImgDataEvidenceInitialSr, as: 'images_evidence_initial', 
                     include: [
                         { model: EvidenceInitialSr, as: 'evidenceInitial' }

@@ -58,6 +58,10 @@ const RemissionData = sequelize.define('remissionData', {
         type: DataTypes.DECIMAL,
         allowNull: true
     },
+    guia: {
+        type: DataTypes.STRING(100),
+        allowNull: true
+    },
     plateId: {
         type: DataTypes.INTEGER,
         allowNull: true,

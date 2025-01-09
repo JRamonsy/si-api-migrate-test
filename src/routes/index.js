@@ -11,6 +11,7 @@ const imgDataEvidenceFinalSrRouter = require('./imgDataEvidenceFinalSR.router');
 const userRouter = require('./user.router');
 const evidenceFinalSrRouter = require('./evidenceFinalSr.router');
 const evidenceInitialSrRouter = require('./evidenceInitialSr.router');
+const imgDataObservationsRouter = require('./imgDataObservations.router');
 const router = express.Router();
 
 // colocar las rutas aquí
@@ -26,5 +27,6 @@ router.use(imgDataEvidenceFinalSrRouter)
 router.use(userRouter)
 router.use(evidenceFinalSrRouter)
 router.use(evidenceInitialSrRouter)
+router.use(imgDataObservationsRouter)
 
 module.exports = router;
