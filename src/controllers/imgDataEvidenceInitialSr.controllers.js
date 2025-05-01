@@ -13,9 +13,10 @@ const getAll = catchError(async(req, res) => {
 
 const create = catchError(async(req, res) => {
     if(!req.file) return res.status(400).json({ message: 'No file uploaded.' });
-    const { url } = await uploadToCloudinary(req.file);
+    const { url, public_id } = await uploadToCloudinary(req.file);
     const image = await ImgDataEvidenceInitialSr.create({
         imageUrl: url,
+        cloudinaryId: public_id,
         service_report_id: req.body.service_report_id
     })
     return res.status(201).json(image);
@@ -33,7 +34,11 @@ const remove = catchError(async(req, res) => {
     const { id } = req.params;
     const image = await ImgDataEvidenceInitialSr.findByPk(id);
     if (!image) return res.status(404).json({ message: 'imagen no encontrada' });
-    await deleteFromCloudinary(image.imageUrl)
+    
+    if (image.cloudinaryId) {
+        await deleteFromCloudinary(image.cloudinaryId);
+    }
+    
     await image.destroy();
     return res.json(image);
 });

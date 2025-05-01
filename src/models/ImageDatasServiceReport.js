@@ -6,6 +6,10 @@ const ImageDatasServiceReport = sequelize.define('imageDatasServiceReport', {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      cloudinaryId: {
+        type: DataTypes.STRING,
+        allowNull: true, // o false si siempre debe tener uno
+    },
       service_report_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
